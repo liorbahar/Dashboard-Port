@@ -16,4 +16,8 @@ export class ChartCreationDto implements ChartType {
   @IsString() 
   @IsNotEmpty()
   type: string;
+
+  @IsString()
+  @IsNotEmpty()
+  propertyName: string
 }

@@ -16,4 +16,8 @@ export class EventService {
     
         return eventDocument.save();
     }
+
+    async getEventsByEventSchemaId(eventSchemaId: string): Promise<EventModel[]> {
+        return await this.eventModel.find({ eventSchemaId: eventSchemaId});
+    }
 }

@@ -17,6 +17,7 @@ import { EventPropertiesValidation } from './validator/event-properties-validato
         EventSchemaValidationExists,
         EventPropertiesValidation
     ],
-    controllers: [EventController]
+    controllers: [EventController],
+    exports: [EventService]
 })
 export class EventModule {}
