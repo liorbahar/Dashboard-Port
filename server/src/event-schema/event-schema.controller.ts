@@ -17,7 +17,7 @@ export class EventSchemaController {
         res.status(201).json(eventSchemaResult)
       }
       catch(e) {
-        throw new HttpException(`Failed to insert event schema named ${data.title} due to ${e}`, HttpStatus.INTERNAL_SERVER_ERROR);
+        throw new HttpException(`Failed to insert event schema named ${data.jsonschema.title} due to ${e}`, HttpStatus.INTERNAL_SERVER_ERROR);
       }
     }
   

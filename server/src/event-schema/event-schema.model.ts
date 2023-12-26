@@ -1,10 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { EventSchema, ProperitesJsonSchema } from './event-schema.interface';
+import { JsonSchema, ProperitesJsonSchema } from './event-schema.interface';
 
-@Schema({ collection: 'eventschemas', timestamps: true, versionKey: false })
-export class EventSchemaModel extends Document implements EventSchema {
+@Schema({ collection: 'eventschemas', versionKey: false })
+export class JsonSchemaModel extends Document implements JsonSchema {
   
+  @Prop({ type: [{ type: String }] })
+  required: string[]
+
   @Prop({ type: MongooseSchema.Types.String })
   title: string;
 
@@ -16,6 +19,14 @@ export class EventSchemaModel extends Document implements EventSchema {
 
   @Prop({ type: MongooseSchema.Types.Mixed })
   properties: ProperitesJsonSchema;
+}
+
+
+@Schema({ collection: 'eventschemas', versionKey: false })
+export class EventSchemaModel extends Document {
+  
+  @Prop({ type: JsonSchemaModel, _id: false })
+  jsonschema: JsonSchemaModel
 }
 
 export const EventSchemaModelSchema = SchemaFactory.createForClass(EventSchemaModel);

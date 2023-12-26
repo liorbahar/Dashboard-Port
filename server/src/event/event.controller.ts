@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body, HttpException, HttpStatus, NotFoundException, Res } from '@nestjs/common';
+import { Controller, Post, Body, HttpException, HttpStatus, Res } from '@nestjs/common';
 import { EventCreationDto } from './event.dto';
 import { Response } from 'express';
 import { EventService } from './event.service';

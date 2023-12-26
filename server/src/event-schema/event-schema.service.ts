@@ -10,10 +10,7 @@ export class EventSchemaService {
 
     async addEventSchema(eventSchema: EventSchema): Promise<EventSchemaModel> {
         const eventSchemaDocument = new this.EventSchemaModel({
-            title: eventSchema.title,
-            description: eventSchema.description,
-            type: eventSchema.type,
-            properties: eventSchema.properties
+            jsonschema: eventSchema.jsonschema
         });
     
         return eventSchemaDocument.save();

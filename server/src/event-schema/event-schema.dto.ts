@@ -1,8 +1,12 @@
-import { IsNotEmpty, IsString, IsObject, Validate } from 'class-validator';
-import { EventSchema, ProperitesJsonSchema } from './event-schema.interface';
+import { IsNotEmpty, IsString, IsObject, Validate, IsArray } from 'class-validator';
+import { JsonSchema, ProperitesJsonSchema } from './event-schema.interface';
 import { DuplicateEventSchemaTitleValidation } from './validators/duplicate-event-schema-title-validator';
+import { Type } from 'class-transformer';
 
-export class EventShemaCreationDto implements EventSchema {
+export class JsonSchemaDto implements JsonSchema {
+  
+  @IsArray()
+  required: string[];
   
   @IsString() 
   @IsNotEmpty()
@@ -20,4 +24,14 @@ export class EventShemaCreationDto implements EventSchema {
   @IsObject() 
   @IsNotEmpty()
   properties: ProperitesJsonSchema;
+}
+
+export class EventShemaCreationDto {
+  
+  @IsObject() 
+  @IsNotEmpty()
+  @Type(() => JsonSchemaDto)
+  jsonschema : JsonSchemaDto
+
+  
 }

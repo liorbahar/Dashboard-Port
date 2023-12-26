@@ -6,6 +6,7 @@ import { EventService } from './event.service';
 import { EventSchemaModule } from 'src/event-schema/event-schema.module';
 import { APP_PIPE } from '@nestjs/core';
 import { EventSchemaValidationExists } from '../event-schema/validators/event-schema-exists-validator';
+import { EventPropertiesValidation } from './validator/event-properties-validator';
 
 @Module({
     imports: [
@@ -13,7 +14,8 @@ import { EventSchemaValidationExists } from '../event-schema/validators/event-sc
         MongooseModule.forFeature([{ name: EventModel.name, schema: EventModelSchema }])],
     providers: [
         EventService,
-        EventSchemaValidationExists
+        EventSchemaValidationExists,
+        EventPropertiesValidation
     ],
     controllers: [EventController]
 })

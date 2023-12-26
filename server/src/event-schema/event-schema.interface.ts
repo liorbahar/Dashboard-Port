@@ -6,10 +6,14 @@ export interface ProperitesJsonSchema {
   }
   
 
-export type EventSchema = {
-    id?: string,
+export type JsonSchema = {
     title: string;
     description: string;
     type: string;
     properties: ProperitesJsonSchema
+}
+
+export type EventSchema = {
+  id?: string;
+  jsonschema: JsonSchema
 }
