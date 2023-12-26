@@ -3,6 +3,7 @@ import { ChartCreationDto } from './chart.dto';
 import { Response } from 'express';
 import { ChartService } from './chart.service';
 import { ChartModel } from './chart.model';
+import { ChartData } from './chart.interface';
 
 
 @Controller('chart')
@@ -21,7 +22,7 @@ export class ChartController {
     }
 
     @Get()
-    public async findAllCharts(): Promise<ChartModel[]> {
+    public async findAllCharts(): Promise<ChartData[]> {
       return await this.chartService.findAll();
     }
 }

@@ -2,14 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ChartModel } from './chart.model';
-import { ChartType } from './chart.interface';
+import { ChartData, ChartDataCollector, ChartKeyValuePair, ChartType } from './chart.interface';
 import { EventService } from 'src/event/event.service';
 import { EventType } from 'src/event/event.interface';
+import { ChartFactory } from './factory/chart.factory';
+
 
 @Injectable()
 export class ChartService {
     constructor(@InjectModel(ChartModel.name) private chartModel: Model<ChartModel>,
-    private eventService: EventService) {}
+    private eventService: EventService,
+    private chartFactory: ChartFactory) {}
 
     async addChart(chart: ChartType): Promise<ChartModel> {
         const chartDocument = new this.chartModel({
@@ -21,40 +24,16 @@ export class ChartService {
         return chartDocument.save();
     }
 
-    async findAll(): Promise<any> {
+    async findAll(): Promise<ChartData[]> {
         const charts: ChartModel[] = await this.chartModel.find();
-        const chartPropertiesMap: any[] = [];
+        const chartPropertiesMap: ChartData[] = [];
 
         for (const chart of charts) {
-            const chartPropertyMap: { [key: string]: number} = await this.calc(chart);
-            chartPropertiesMap.push({
-                chart: chart,
-                properties: chartPropertyMap
-            })
+            const chartCollector: ChartDataCollector = await this.chartFactory.getChartCollector(chart);
+            const chartData: ChartData = await chartCollector.getData(chart);
+            chartPropertiesMap.push(chartData);
         }
         
         return chartPropertiesMap
-       
-    }
-
-    private async calc(chart: ChartModel): Promise<{ [key: string]: number}> {
-        const chartPropertyMap: { [key: string]: number} = {};
-
-        const events: EventType[] = await this.eventService.getEventsByEventSchemaId(chart.eventSchemaId);
-        
-        for (const event of events) {
-
-            for (const propertyKey of Object.keys(event.properties)) {
-                const propertyValue: any = event.properties[propertyKey];
-                
-                if (!chartPropertyMap[propertyValue]) {
-                    chartPropertyMap[propertyValue] = 1;
-                } else {
-                    chartPropertyMap[propertyValue] += 1;
-                }
-            }
-        }
-        
-        return chartPropertyMap;
     }
 }
