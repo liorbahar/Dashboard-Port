@@ -4,6 +4,7 @@ import { EventShemaCreationDto } from './event-schema.dto';
 import { Response } from 'express';
 import { EventSchemaModel } from './event-schema.model';
 import { EventSchemaExistsValidationPipe } from './validators/event-schema-exists-pipe';
+import { EventSchema } from './event-schema.interface';
 
 
 @Controller('eventschema')
@@ -22,7 +23,7 @@ export class EventSchemaController {
     }
   
     @Get()
-    public async findAllEventSchemas(): Promise<any> {
+    public async findAllEventSchemas(@Res() res: Response): Promise<any> {
       return await this.eventSchemaService.findAllEventSchemas();
     }
 
