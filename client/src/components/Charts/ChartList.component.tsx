@@ -38,9 +38,6 @@ const ChartList: React.FC<ChartListProps> = ({ charts, setCharts }) => {
 
     const onDragEnd = async (result: DropResult) => {
         const { destination, source } = result;
-
-        console.log(source.index)
-        console.log(destination.index)
         
         if (!destination) {
           return;

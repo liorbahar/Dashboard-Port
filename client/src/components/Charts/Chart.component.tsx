@@ -12,17 +12,16 @@ export type ChartProps = {
 
 
 const Chart: React.FC<ChartProps> = ({ index, chart}) => {
-
   const indexUinq = `${chart.chart.id}${index}`
 
   return (
       <Draggable draggableId={indexUinq} key={indexUinq} index={index}>
       {(provided, snapshot) => (
         <div  {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-           <Typography align="center">{chart.chart.name}</Typography>
-            {getChartFactory(chart.chart.chartKind.type, chart.data)}
-    </div>
-        
+          {chart.data.length > 0 ? <Typography align="center">{chart.chart.name}</Typography> :
+          <Typography align="center">{chart.chart.name} - No Data</Typography>}
+          {getChartFactory(chart.chart.chartKind.type, chart.data)}
+        </div>
       )}
     </Draggable>
   );
