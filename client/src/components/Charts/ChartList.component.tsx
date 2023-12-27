@@ -38,7 +38,7 @@ const ChartList: React.FC<ChartListProps> = ({ charts, setCharts }) => {
 
     const onDragEnd = async (result: DropResult) => {
         const { destination, source } = result;
-        
+
         if (!destination) {
           return;
         }
@@ -58,7 +58,6 @@ const ChartList: React.FC<ChartListProps> = ({ charts, setCharts }) => {
          <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="ChartList">
                 {(provided, snapshot) => (
-
                     <div className={classes.charts} ref={provided.innerRef} {...provided.droppableProps}>
                         {charts.map((chart: ChartDetails, index: number) => (
                             <div key={index} className={classes.rowContainer}>
