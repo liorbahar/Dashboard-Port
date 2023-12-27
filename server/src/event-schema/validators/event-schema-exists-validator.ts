@@ -5,7 +5,7 @@ import {
   } from 'class-validator';
   import { HttpException, Injectable } from '@nestjs/common';
 import { EventSchemaService } from 'src/event-schema/event-schema.service';
-import { EventSchemaModel } from '../event-schema.model';
+import { EventSchemaModel } from '../../database/schemas/event-schema.model';
   
 @ValidatorConstraint({ name: 'EventSchemaValidationExists', async: true })
 @Injectable()

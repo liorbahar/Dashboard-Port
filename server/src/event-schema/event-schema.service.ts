@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { EventSchemaModel } from './event-schema.model';
+import { EventSchemaModel } from '../database/schemas/event-schema.model';
 import { EventSchema } from './event-schema.interface';
 
 @Injectable()
@@ -17,15 +17,15 @@ export class EventSchemaService {
     }
     
     async findAllEventSchemas(): Promise<EventSchemaModel[]> {
-        return await this.EventSchemaModel.find() 
+        return await this.EventSchemaModel.find();
     }
 
     async deleteEventSchema(eventSchemaId: string): Promise<void> {
-        await this.EventSchemaModel.deleteOne({ _id: eventSchemaId })
+        await this.EventSchemaModel.deleteOne({ _id: eventSchemaId });
     }
 
     async findEventSchema(eventSchemaId: string): Promise<EventSchemaModel> {
-        return await this.EventSchemaModel.findById(eventSchemaId)
+        return await this.EventSchemaModel.findById(eventSchemaId);
     }
 
     async findEventSchemaByName(eventName: string): Promise<EventSchemaModel> {

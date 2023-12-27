@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { ChartData, ChartDataCollector, ChartKeyValuePair } from "../chart.interface";
+import { ChartData, ChartDataCollector, ChartKeyValuePair } from "../../chart/chart.interface";
 import { EventService } from "src/event/event.service";
 import { EventType } from "src/event/event.interface";
-import { ChartModel } from "../chart.model";
+import { ChartModel } from "../../database/schemas/chart.model";
 
 @Injectable()
 export class ChartCount implements ChartDataCollector {

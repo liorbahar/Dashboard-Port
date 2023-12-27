@@ -10,6 +10,7 @@ import { withTheme } from 'react-jsonschema-form';
 import { Theme as MuiTheme } from 'rjsf-material-ui';
 import { EventSchema } from '../../services/types/EventSchema';
 import { addEvent } from '../../services/Event.service';
+import { EventCreationProps } from '../../services/types/Event';
 
 const Form = withTheme(MuiTheme);
 
@@ -33,17 +34,18 @@ export type EventSchemaCreationDialogProps = {
 
 const EventDialog: React.FC<EventSchemaCreationDialogProps> = ({ open, handleClose }) => {
   const classes = useStyles();
-  const [event, setEvent] = useState<{ data: Object}>({ data: {}});
+  const [event, setEvent] = useState<{ data: { [key: string]: object }}>({ data: {}});
   const [eventSchema, setEventSchema] = useState<EventSchema>();
   const [jsonSchema, setJsonSchema] = useState<Object>();
 
 
   const onChange = (eventForm: {formData: Object}) => {
+    // do this logic instead of set to useState because of bug in the lib
     const properties = eventForm.formData; 
     const data = {}
     Object.keys(properties).forEach((key) => {
       const value: any = properties[key];
-      data[key] = value
+      data[key] = value;
     })
 
     event.data = data
@@ -60,20 +62,19 @@ const EventDialog: React.FC<EventSchemaCreationDialogProps> = ({ open, handleClo
   }
 
   const onCreateEvent = () => {
-    const body = {
+    const body: EventCreationProps = {
       eventSchemaId: eventSchema.id,
       properties: event.data
     }
 
     addEvent(body)
     .then(res => {
-      console.log(res)
+      handleClose()
     })
   }
 
   return (
     <div>
-      
       <Dialog
           open={open}
           onClose={handleClose}

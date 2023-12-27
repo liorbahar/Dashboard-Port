@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { EventType } from './event.interface';
+import { EventType } from '../../event/event.interface';
 
 @Schema({ collection: 'events', timestamps: true, versionKey: false })
 export class EventModel extends Document implements EventType {

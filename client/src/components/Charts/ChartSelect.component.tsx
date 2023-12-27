@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { getAllChartsKinds } from '../../services/Chart.service';
 import { ChartKind } from '../../services/types/Chart';
 import CostumeSelect, { SelectData } from '../Common/CustomeSelect.component';
@@ -26,10 +25,10 @@ const ChartSelect: React.FC<EventSchemaSelectProps> = ({ onChange }) => {
     });
   }
   
-
+  
   return (
     <div>
-     <CostumeSelect onChange={onChange} data={data}/>
+      <CostumeSelect onChange={onChange} data={data} title='Chart'/>
     </div>
   );
 }

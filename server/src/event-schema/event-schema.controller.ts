@@ -2,7 +2,7 @@ import { Controller, Post, Get, Body, Delete, Param, HttpException, HttpStatus, 
 import { EventSchemaService } from './event-schema.service';
 import { EventShemaCreationDto } from './event-schema.dto';
 import { Response } from 'express';
-import { EventSchemaModel } from './event-schema.model';
+import { EventSchemaModel } from '../database/schemas/event-schema.model';
 import { EventSchemaExistsValidationPipe } from './validators/event-schema-exists-pipe';
 import { EventSchema } from './event-schema.interface';
 
@@ -24,7 +24,8 @@ export class EventSchemaController {
   
     @Get()
     public async findAllEventSchemas(@Res() res: Response): Promise<any> {
-      return await this.eventSchemaService.findAllEventSchemas();
+      const eventSchemas: EventSchemaModel[] = await this.eventSchemaService.findAllEventSchemas();
+      res.json(eventSchemas)
     }
 
     @Get(':eventSchemaId')

@@ -1,10 +1,12 @@
-import { ChartModel } from "./chart.model";
+import { ChartModel } from "../database/schemas/chart.model";
+import { ChartKind } from "src/chart-kind/chart-kind.interface";
 
 export type ChartType = {
     id?: string,
     eventSchemaId?: string,
     name: string,
-    type: string
+    chartKind: string | ChartKind,
+    propertyName: string
 }
 
 export type ChartKeyValuePair = {
@@ -13,7 +15,7 @@ export type ChartKeyValuePair = {
 }
 
 export type ChartData = {
-    chart: ChartType,
+    chart: ChartType
     data: ChartKeyValuePair[]
 }
 
@@ -23,5 +25,5 @@ export interface ChartDataCollector {
 
 
 export interface ChartCollectorFactory {
-    getChartCollector(chart: ChartModel): Promise<ChartDataCollector>
+    getChartCollector(chartType: string): Promise<ChartDataCollector>
 }

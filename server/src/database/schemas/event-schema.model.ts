@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { JsonSchema, ProperitesJsonSchema } from './event-schema.interface';
+import { JsonSchema, ProperitesJsonSchema } from '../../event-schema/event-schema.interface';
 
 @Schema({ collection: 'eventschemas', versionKey: false })
 export class JsonSchemaModel extends Document implements JsonSchema {

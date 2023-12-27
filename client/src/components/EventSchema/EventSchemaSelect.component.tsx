@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { MenuItem, OutlinedInput, Select } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { getAllEventSchemas } from '../../services/EventSchema.service';
 import { EventSchema } from '../../services/types/EventSchema';
-import { ChartKind } from '../../services/types/Chart';
 import CostumeSelect, { SelectData } from '../Common/CustomeSelect.component';
 
 
@@ -50,7 +48,7 @@ const EventSchemaSelect: React.FC<EventSchemaSelectProps> = ({ onChange }) => {
 
   return (
     <div>
-       <CostumeSelect onChange={onChange} data={data}/>
+       <CostumeSelect onChange={onChange} data={data} title='Event Schema'/>
     </div>
   );
 }

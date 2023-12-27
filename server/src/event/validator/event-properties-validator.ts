@@ -2,7 +2,7 @@ import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments 
   import { BadRequestException, Injectable } from '@nestjs/common';
 import { EventSchemaService } from 'src/event-schema/event-schema.service';
 import Ajv from 'ajv';
-import { EventSchemaModel } from 'src/event-schema/event-schema.model';
+import { EventSchemaModel } from 'src/database/schemas/event-schema.model';
 import { EventCreationDto } from '../event.dto';
   
 @ValidatorConstraint({ name: 'EventPropertiesValidation', async: true })

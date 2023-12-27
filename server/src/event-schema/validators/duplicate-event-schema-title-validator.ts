@@ -2,7 +2,7 @@ import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments 
   import { HttpException, Injectable } from '@nestjs/common';
 import { EventSchemaService } from 'src/event-schema/event-schema.service';
 import { isNull } from 'lodash';
-import { EventSchemaModel } from '../event-schema.model';
+import { EventSchemaModel } from '../../database/schemas/event-schema.model';
   
 @ValidatorConstraint({ name: 'DuplicateEventSchemaTitleValidation', async: true })
 @Injectable()

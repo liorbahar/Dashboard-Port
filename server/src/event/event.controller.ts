@@ -2,7 +2,7 @@ import { Controller, Post, Body, HttpException, HttpStatus, Res } from '@nestjs/
 import { EventCreationDto } from './event.dto';
 import { Response } from 'express';
 import { EventService } from './event.service';
-import { EventModel } from './event.model';
+import { EventModel } from '../database/schemas/event.model';
 
 
 @Controller('event')

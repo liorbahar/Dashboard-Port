@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { MenuItem, OutlinedInput, Select } from '@material-ui/core';
+import React from 'react';
+import { MenuItem, OutlinedInput, Select, Typography } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { getAllChartsKinds } from '../../services/Chart.service';
-import { ChartKind } from '../../services/types/Chart';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -10,8 +8,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        marginTop:'3%'
+        alignItems: 'center'
     },
     option: {
         height: '10%',
@@ -22,6 +19,9 @@ const useStyles = makeStyles((theme: Theme) =>
     select: {
         borderRadius: '6px',
         width: '100%'
+    },
+    title: {
+      marginTop: '2%'
     }
   })
 );
@@ -32,17 +32,18 @@ export type SelectData = {
 }
 export type EventSchemaSelectProps = {
   onChange: (value: any) => void,
-  data: SelectData[]
+  data: SelectData[],
+  title: string
 }
 
-
-
-const CostumeSelect: React.FC<EventSchemaSelectProps> = ({ onChange, data }) => {
+const CostumeSelect: React.FC<EventSchemaSelectProps> = ({ onChange, data, title }) => {
   const classes = useStyles();
   
   return (
-    <div className={classes.root}>
-     <Select
+    <div>
+      <Typography className={classes.title}>{title}</Typography>
+      <div className={classes.root}>
+      <Select
         className={classes.select}
         onChange={(event) => { onChange(event.target.value)}}
         input={<OutlinedInput margin='dense' classes={{ input: classes.input }} />}
@@ -55,6 +56,8 @@ const CostumeSelect: React.FC<EventSchemaSelectProps> = ({ onChange, data }) => 
                 )
             })}
     </Select>
+      </div>
+     
     </div>
   );
 }

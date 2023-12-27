@@ -1,17 +1,14 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { ChartComponentProps } from './ChartFactory.component';
 
-const BarChartEvent = () => {
-  const data = [
-    { name: 'Category 1', value: 25 },
-    { name: 'Category 2', value: 40 },
-    { name: 'Category 3', value: 30 },
-  ];
+const BarChartEvent: React.FC<ChartComponentProps> = ({ data }) => {
+  
 
   return (
-    <BarChart width={600} height={300} data={data}>
+    <BarChart width={700} height={300} data={data}>
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
+      <XAxis dataKey="key" />
       <YAxis />
       <Tooltip />
       <Legend />
@@ -20,4 +17,4 @@ const BarChartEvent = () => {
   );
 };
 
-export default BarChartEvent
+export default BarChartEvent;
