@@ -1,2 +1,3 @@
-1. the design is (Frontend → Backend → Mongo DB)
-2. i choosed monog db beacause we deal with jsonschema and its comfortable.
+1. the design is (Frontend(React + Typescript) → Backend Service (NestJs + Typescript) → Mongo DB)
+2. i chose monog db beacause we deal with jsonschema and its comfortable.
+3. the Frontend is inside the client folder and backend in server folder

@@ -2,6 +2,7 @@
 2. run the command: npm start
 3. the server will run on port 3001
 
+* the service communicate with mongo db
 
 db architecture:
 there are serveral collections
