@@ -12,7 +12,7 @@ export class DuplicateEventSchemaTitleValidation implements ValidatorConstraintI
     async validate(value: any, args: ValidationArguments): Promise<boolean> {
       try {
         const eventSchema: EventSchemaModel = await this.eventSchemaService.findEventSchemaByName(value);
-        return isNull(eventSchema)
+        return isNull(eventSchema);
       }
       catch(e) {
         return false;
