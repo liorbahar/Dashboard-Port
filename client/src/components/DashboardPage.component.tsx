@@ -5,13 +5,8 @@ import AddIcon from '@material-ui/icons/Add';
 import ChartDialog from './Charts/ChartDialog.component';
 import { getAllCharts } from '../services/Chart.service';
 import { ChartDetails } from '../services/types/Chart';
-import { getChartFactory } from './Charts/ChartFactory.component';
-import { Droppable,DragDropContext, DropResult,Draggable } from 'react-beautiful-dnd';
-import Chart from './Charts/Chart.component';
-import { Sector } from 'recharts';
 import ChartList from './Charts/ChartList.component';
-
-
+import { useSnackbar } from 'notistack';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,7 +42,7 @@ const DashboardPage = ({  }) => {
   const classes = useStyles();
   const [openChartDialog, setOpenChartDialog] = useState(null);
   const [charts, setCharts] = useState<ChartDetails[]>([]);
-
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     fetchAllCharts()
@@ -57,6 +52,8 @@ const DashboardPage = ({  }) => {
     getAllCharts().then((charts: ChartDetails[]) => {
       const sortedCharts: ChartDetails[] = charts.sort((a:ChartDetails, b: ChartDetails) => a.chart.order - b.chart.order);
       setCharts(sortedCharts)
+    }).catch(err => {
+      enqueueSnackbar('Error Fetching all charts',{variant : 'error'});
     })
   }
 

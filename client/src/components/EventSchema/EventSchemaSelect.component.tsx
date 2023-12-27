@@ -1,35 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { getAllEventSchemas } from '../../services/EventSchema.service';
 import { EventSchema } from '../../services/types/EventSchema';
 import CostumeSelect, { SelectData } from '../Common/CustomeSelect.component';
-
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    
-    option: {
-        height: '10%',
-    },
-    input: {
-        height: '10%'
-    },
-    select: {
-        borderRadius: '6px',
-        width: '100%'
-    }
-  })
-);
+import { useSnackbar } from 'notistack';
 
 export type EventSchemaSelectProps = {
   onChange: (value: any) => void
 }
 
 const EventSchemaSelect: React.FC<EventSchemaSelectProps> = ({ onChange }) => {
-  const classes = useStyles();
   const [eventSchemas, setEventSchemas] = useState<EventSchema[]>([]);
   const [data, setData] = useState<SelectData[]>([]);
-
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     fetchEventSchemas();
@@ -42,6 +24,8 @@ const EventSchemaSelect: React.FC<EventSchemaSelectProps> = ({ onChange }) => {
           return { name: evenetSchema.jsonschema.title, value: evenetSchema }
         });
         setData(selectOptions);
+    }).catch(err => {
+      enqueueSnackbar('Error Fetching event schemas',{variant : 'error'});
     });
   }
   

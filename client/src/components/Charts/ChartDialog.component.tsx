@@ -11,6 +11,7 @@ import EventSchemaSelect from '../EventSchema/EventSchemaSelect.component';
 import { EventSchema } from '../../services/types/EventSchema';
 import CostumeSelect, { SelectData } from '../Common/CustomeSelect.component';
 import { addChart } from '../../services/Chart.service';
+import { useSnackbar } from 'notistack';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -38,6 +39,7 @@ const ChartDialog: React.FC<EventSchemaCreationDialogProps> = ({ open, handleClo
   const [selectedEventSchema, setSelectedEventSchema] = useState<EventSchema>();
   const [selectedEventSchemaProperty, setSelectedEventSchemaProperty] = useState<string>();
   const [eventSchemaProperties, setEventSchemaProperties] = useState<SelectData[]>([]);
+  const { enqueueSnackbar } = useSnackbar();
 
   const onChangeChartKind = (chartKind: ChartKind) => {
     setSelectedChartKind(chartKind);
@@ -62,11 +64,14 @@ const ChartDialog: React.FC<EventSchemaCreationDialogProps> = ({ open, handleClo
       chartKind: selectedChartKind.id,
       propertyName: selectedEventSchemaProperty
     }
-    
+
     addChart(body).then((res) => {
         handleClose();
         onSuccess();
-    })
+        enqueueSnackbar('Chart created successfully',{variant : 'success'});
+    }).catch(err => {
+      enqueueSnackbar('Error Fetching charts',{variant : 'error'});
+    });
   }
 
 

@@ -11,6 +11,8 @@ import { Theme as MuiTheme } from 'rjsf-material-ui';
 import { EventSchema } from '../../services/types/EventSchema';
 import { addEvent } from '../../services/Event.service';
 import { EventCreationProps } from '../../services/types/Event';
+import { useSnackbar } from 'notistack';
+
 
 const Form = withTheme(MuiTheme);
 
@@ -37,7 +39,7 @@ const EventDialog: React.FC<EventSchemaCreationDialogProps> = ({ open, handleClo
   const [event, setEvent] = useState<{ data: { [key: string]: object }}>({ data: {}});
   const [eventSchema, setEventSchema] = useState<EventSchema>();
   const [jsonSchema, setJsonSchema] = useState<Object>();
-
+  const { enqueueSnackbar } = useSnackbar();
 
   const onChange = (eventForm: {formData: Object}) => {
     // do this logic instead of set to useState because of bug in the lib
@@ -69,8 +71,12 @@ const EventDialog: React.FC<EventSchemaCreationDialogProps> = ({ open, handleClo
 
     addEvent(body)
     .then(res => {
-      handleClose()
+      handleClose();
+      enqueueSnackbar('Event created successfully',{variant : 'success'});
     })
+    .catch(err => {
+      enqueueSnackbar('Error while create event',{variant : 'error'});
+    });
   }
 
   return (

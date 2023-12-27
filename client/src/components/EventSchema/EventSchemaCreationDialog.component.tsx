@@ -7,6 +7,8 @@ import InputJsonViewer from './InputJsonViewer.component';
 import { Typography } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { createEventSchema } from '../../services/EventSchema.service';
+import { useSnackbar } from 'notistack';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
       textTransform: 'none',
       width:'100%'
     }
-  }),
+  })
 );
 
 
@@ -30,13 +32,18 @@ const EventSchemaCreationDialog: React.FC<EventSchemaCreationDialogProps> = ({ o
   const classes = useStyles();
   const [jsonschema, setJsonschema] = useState(null);
   const [validJson, setIsValidJson] = useState<boolean>(true);
+  const { enqueueSnackbar } = useSnackbar();
 
 
   const onCreateEventSchema = () => {
     createEventSchema(jsonschema)
     .then(res => {
-      handleClose()
-    });
+      handleClose();
+      enqueueSnackbar('Event Schema created successfully',{variant : 'success'});
+    })
+    .catch(err => {
+      enqueueSnackbar('Error while create event schema',{variant : 'error'});
+    })
   }
 
   const onChangeInputJson = (value: any) => {
