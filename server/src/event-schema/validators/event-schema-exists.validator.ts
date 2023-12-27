@@ -1,11 +1,8 @@
-import {
-    ValidatorConstraint,
-    ValidatorConstraintInterface,
-    ValidationArguments,
-  } from 'class-validator';
-  import { HttpException, Injectable } from '@nestjs/common';
+import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
+import { HttpException, Injectable } from '@nestjs/common';
 import { EventSchemaService } from 'src/event-schema/event-schema.service';
 import { EventSchemaModel } from '../../database/schemas/event-schema.model';
+import {isNull} from 'lodash'
   
 @ValidatorConstraint({ name: 'EventSchemaValidationExists', async: true })
 @Injectable()
@@ -15,7 +12,7 @@ export class EventSchemaValidationExists implements ValidatorConstraintInterface
     async validate(value: any, args: ValidationArguments): Promise<boolean> {
       try {
         const eventSchema: EventSchemaModel = await this.eventSchemaService.findEventSchema(value);
-        return (eventSchema !== undefined) && (eventSchema !== null);
+        return !isNull(eventSchema);
       }
       catch(e) {
         return false;

@@ -1,5 +1,5 @@
 import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
-  import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { EventSchemaService } from 'src/event-schema/event-schema.service';
 import Ajv from 'ajv';
 import { EventSchemaModel } from 'src/database/schemas/event-schema.model';

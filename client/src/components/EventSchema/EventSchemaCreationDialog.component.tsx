@@ -4,7 +4,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import InputJsonViewer from './InputJsonViewer.component';
-import { Typography } from '@material-ui/core';
+import { LinearProgress, Typography } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { createEventSchema } from '../../services/EventSchema.service';
 import { useSnackbar } from 'notistack';
@@ -33,15 +33,18 @@ const EventSchemaCreationDialog: React.FC<EventSchemaCreationDialogProps> = ({ o
   const [jsonschema, setJsonschema] = useState();
   const [validJson, setIsValidJson] = useState<boolean>(true);
   const { enqueueSnackbar } = useSnackbar();
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const onCreateEventSchema = () => {
+    setIsLoading(true);
     createEventSchema(jsonschema)
     .then(res => {
       handleClose();
+      setIsLoading(false);
       enqueueSnackbar('Event Schema created successfully',{variant : 'success'});
     })
     .catch(err => {
+      setIsLoading(false);
       enqueueSnackbar('Error while create event schema',{variant : 'error'});
     })
   }
@@ -86,6 +89,8 @@ const EventSchemaCreationDialog: React.FC<EventSchemaCreationDialogProps> = ({ o
           <InputJsonViewer onChange={onChangeInputJson} isValid={validJson}/>
         </DialogContent>
         <DialogActions>
+        {isLoading && <LinearProgress />}
+
           <Button disabled={!validJson} className={classes.saveButton} onClick={onCreateEventSchema} fullWidth variant='contained' color="primary">
             Create
           </Button>

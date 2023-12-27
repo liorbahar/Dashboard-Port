@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { Container, Fab, List, Tooltip, Typography } from '@material-ui/core';
+import { CircularProgress, Fab, Tooltip } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import ChartDialog from './Charts/ChartDialog.component';
 import { getAllCharts } from '../services/Chart.service';
@@ -42,6 +42,7 @@ const DashboardPage = ({  }) => {
   const classes = useStyles();
   const [openChartDialog, setOpenChartDialog] = useState(null);
   const [charts, setCharts] = useState<ChartDetails[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -49,10 +50,14 @@ const DashboardPage = ({  }) => {
   }, []);
 
   const fetchAllCharts = () => {
-    getAllCharts().then((charts: ChartDetails[]) => {
+    setIsLoading(true);
+    getAllCharts()
+    .then((charts: ChartDetails[]) => {
       const sortedCharts: ChartDetails[] = charts.sort((a:ChartDetails, b: ChartDetails) => a.chart.order - b.chart.order);
-      setCharts(sortedCharts)
+      setCharts(sortedCharts);
+      setIsLoading(false);
     }).catch(err => {
+      setIsLoading(false);
       enqueueSnackbar('Error Fetching all charts',{variant : 'error'});
     })
   }
@@ -74,9 +79,9 @@ const DashboardPage = ({  }) => {
             </Fab>
         </Tooltip>
       </div>
-      <ChartDialog open={openChartDialog} handleClose={onCloseChartClient} onSuccess={fetchAllCharts}/> 
-      <ChartList charts={charts} setCharts={setCharts}/>
-              
+      <ChartDialog open={openChartDialog} handleClose={onCloseChartClient} onSuccess={fetchAllCharts}/>
+      {isLoading ? <CircularProgress color="secondary" /> : <ChartList charts={charts} setCharts={setCharts}/>} 
+        
     </div>  
   );
 };

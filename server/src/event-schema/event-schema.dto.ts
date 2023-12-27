@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString, IsObject, Validate, IsArray } from 'class-validator';
 import { JsonSchema, ProperitesJsonSchema } from './event-schema.interface';
-import { DuplicateEventSchemaTitleValidation } from './validators/duplicate-event-schema-title-validator';
+import { DuplicateEventSchemaTitleValidation } from './validators/duplicate-event-schema-title.validator';
 import { Type } from 'class-transformer';
 
 export class JsonSchemaDto implements JsonSchema {

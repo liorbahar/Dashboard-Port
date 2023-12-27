@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body, Delete, Param, HttpException, HttpStatus, NotFoundException, Res, ConflictException } from '@nestjs/common';
+import { Controller, Post, Get, Body, Delete, Param, HttpException, HttpStatus, Res } from '@nestjs/common';
 import { EventSchemaService } from './event-schema.service';
 import { EventShemaCreationDto } from './event-schema.dto';
 import { Response } from 'express';

@@ -5,7 +5,6 @@ export interface ProperitesJsonSchema {
     };
   }
   
-
 export type JsonSchema = {
     title: string;
     description: string;

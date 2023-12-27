@@ -1,5 +1,5 @@
-import { Injectable, PipeTransform, ArgumentMetadata, BadRequestException, ParseIntPipe, HttpStatus, NotFoundException } from '@nestjs/common';
-import { EventSchemaValidationExists } from './event-schema-exists-validator';
+import { Injectable, PipeTransform, ArgumentMetadata, NotFoundException } from '@nestjs/common';
+import { EventSchemaValidationExists } from './event-schema-exists.validator';
 
 @Injectable()
 export class EventSchemaExistsValidationPipe implements PipeTransform<any> {
