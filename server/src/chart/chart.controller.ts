@@ -30,10 +30,10 @@ export class ChartController {
     public async replaceChartLocations(@Res() res: Response, @Body() data: ChartLocationReplaceDto): Promise<void> {
       try {
         await this.chartService.replaceChartOrder(data.sourceChartId, data.destinationChartId);
-        res.status(HttpStatus.OK).json({ "message" :  `Replacement charts done`});
+        res.status(HttpStatus.OK).json({ "message" : `Replacement charts done`});
       }
       catch(e) {
-        throw new HttpException(`Failed to insert chart due to ${e}`, HttpStatus.INTERNAL_SERVER_ERROR);
+        throw new HttpException(`Failed to replace charts due to ${e}`, HttpStatus.INTERNAL_SERVER_ERROR);
       }
     }
 }

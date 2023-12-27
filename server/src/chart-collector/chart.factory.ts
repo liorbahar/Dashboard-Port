@@ -1,6 +1,5 @@
 import { Injectable } from "@nestjs/common";
 import { ChartCollectorFactory, ChartDataCollector } from "../chart/chart.interface";
-import { ChartModel } from "../database/schemas/chart.model";
 import { ChartCount } from "./collector/chart-count.collector";
 
 @Injectable()
