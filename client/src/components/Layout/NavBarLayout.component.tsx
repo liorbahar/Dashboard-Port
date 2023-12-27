@@ -13,6 +13,9 @@ const useStyles = makeStyles(() =>
     },
     option: {
       marginLeft:'2%'
+    },
+    appBar: {
+      backgroundColor:'#222A63 '
     }
   }),
 );
@@ -27,7 +30,7 @@ const useStyles = makeStyles(() =>
 
   return (
     <div className={classes.height}>
-      <AppBar position="static" style={{backgroundColor:'#222A63 '}}>
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <IconButton edge="start" onClick={onAdminClick} color="inherit">
             <Typography>Admin</Typography>
