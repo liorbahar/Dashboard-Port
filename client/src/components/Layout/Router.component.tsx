@@ -1,10 +1,6 @@
 import React from 'react';
 import * as ReactDOM from "react-dom";
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  RouterProvider, Route
-} from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from "react-router-dom";
 import NavBarLayout from './NavBarLayout.component';
 import AdminPage from '../AdminPage.component';
 import DashboardPage from '../DashboardPage.component';
