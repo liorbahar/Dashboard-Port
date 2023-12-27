@@ -13,7 +13,7 @@ export class EventController {
     public async createEvent(@Res() res: Response, @Body() data: EventCreationDto): Promise<void> {
       try {
         const event: EventModel = await this.eventService.addEvent(data);
-        res.status(201).json(event);
+        res.status(HttpStatus.CREATED).json(event);
       }
       catch(e) {
         throw new HttpException(`Failed to insert event data of event ${data.eventSchemaId} due to ${e}`, HttpStatus.INTERNAL_SERVER_ERROR);

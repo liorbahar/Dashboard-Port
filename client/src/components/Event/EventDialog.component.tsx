@@ -79,11 +79,18 @@ const EventDialog: React.FC<EventSchemaCreationDialogProps> = ({ open, handleClo
     });
   }
 
+  const onClose = () => {
+    setEventSchema(undefined);
+    setJsonSchema(undefined);
+    setEvent({ data: {}});
+    handleClose()
+  }
+
   return (
     <div>
       <Dialog
           open={open}
-          onClose={handleClose}
+          onClose={onClose}
           maxWidth="sm"
           fullWidth 
           classes={{ paper: classes.customDialog }}

@@ -4,8 +4,6 @@ import { EventShemaCreationDto } from './event-schema.dto';
 import { Response } from 'express';
 import { EventSchemaModel } from '../database/schemas/event-schema.model';
 import { EventSchemaExistsValidationPipe } from './validators/event-schema-exists-pipe';
-import { EventSchema } from './event-schema.interface';
-
 
 @Controller('eventschema')
 export class EventSchemaController {
@@ -15,7 +13,7 @@ export class EventSchemaController {
     public async createEventSchema(@Res() res: Response, @Body() data: EventShemaCreationDto): Promise<void> {
       try {
         const eventSchemaResult: EventSchemaModel = await this.eventSchemaService.addEventSchema(data);
-        res.status(201).json(eventSchemaResult)
+        res.status(HttpStatus.CREATED).json(eventSchemaResult)
       }
       catch(e) {
         throw new HttpException(`Failed to insert event schema named ${data.jsonschema.title} due to ${e}`, HttpStatus.INTERNAL_SERVER_ERROR);

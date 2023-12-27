@@ -1,5 +1,5 @@
 import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
-  import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import {isNull} from 'lodash'
 import { ChartService } from '../chart.service';
 import { ChartModel } from 'src/database/schemas/chart.model';

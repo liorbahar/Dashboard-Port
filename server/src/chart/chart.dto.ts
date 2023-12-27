@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString, Validate } from 'class-validator';
+import { IsNotEmpty, IsString, Validate } from 'class-validator';
 import { EventSchemaValidationExists } from '../event-schema/validators/event-schema-exists-validator';
 import { ChartType } from './chart.interface';
 import { ChartKindExistsValidation } from 'src/chart-kind/validator/chart-kind-exists.validator';

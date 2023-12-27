@@ -30,7 +30,7 @@ export type EventSchemaCreationDialogProps = {
 
 const EventSchemaCreationDialog: React.FC<EventSchemaCreationDialogProps> = ({ open, handleClose }) => {
   const classes = useStyles();
-  const [jsonschema, setJsonschema] = useState(null);
+  const [jsonschema, setJsonschema] = useState();
   const [validJson, setIsValidJson] = useState<boolean>(true);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -48,7 +48,7 @@ const EventSchemaCreationDialog: React.FC<EventSchemaCreationDialogProps> = ({ o
 
   const onChangeInputJson = (value: any) => {
     const isValidJson: boolean = validateJson(value);
-    setIsValidJson(isValidJson)
+    setIsValidJson(isValidJson);
     if (isValidJson && value !== '') {
       setJsonschema(JSON.parse(value));
     } 
@@ -66,11 +66,17 @@ const EventSchemaCreationDialog: React.FC<EventSchemaCreationDialogProps> = ({ o
     }
   }
 
+  const onClose = () => {
+    setJsonschema(undefined);
+    setIsValidJson(true);
+    handleClose();
+  }
+
   return (
     <div>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={onClose}
         maxWidth="sm"
         fullWidth 
         classes={{ paper: classes.customDialog }}

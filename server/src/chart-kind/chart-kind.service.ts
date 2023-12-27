@@ -19,7 +19,7 @@ export class ChartKindService implements OnModuleInit {
         return await this.chartKindModel.findById(chartKindId);
     }
 
-    // this function load fake data to db when the program start
+    // generate fake data for the test
     private async insertChartKinds(): Promise<void> {
         try {
             const chart1 = new this.chartKindModel({ type: 'bar' });
@@ -27,8 +27,6 @@ export class ChartKindService implements OnModuleInit {
             await chart1.save();
             await chart2.save();
         }
-        catch(e) {
-            console.log(e)
-        }
+        catch(e) {}
     }
 }

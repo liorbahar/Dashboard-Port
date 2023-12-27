@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     textArea: {
         width: '100%',
-        minHeight:'30%',
+        minHeight:'13%',
         display: 'flex',
         justifyContent: 'center',
         marginTop:'0.5%'

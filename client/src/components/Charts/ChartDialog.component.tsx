@@ -66,7 +66,7 @@ const ChartDialog: React.FC<EventSchemaCreationDialogProps> = ({ open, handleClo
     }
 
     addChart(body).then((res) => {
-        handleClose();
+        onClose();
         onSuccess();
         enqueueSnackbar('Chart created successfully',{variant : 'success'});
     }).catch(err => {
@@ -74,12 +74,20 @@ const ChartDialog: React.FC<EventSchemaCreationDialogProps> = ({ open, handleClo
     });
   }
 
+  const onClose = () => {
+    setSelectedChartKind(undefined);
+    setSelectedEventSchema(undefined);
+    setSelectedEventSchemaProperty(undefined);
+    setEventSchemaProperties([]);
+    handleClose();
+  }
+
 
   return (
     <div>
       <Dialog
           open={open}
-          onClose={handleClose}
+          onClose={onClose}
           maxWidth="sm"
           fullWidth 
           classes={{ paper: classes.customDialog }}
