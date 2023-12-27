@@ -9,11 +9,8 @@ export class EventSchemaService {
     constructor(@InjectModel(EventSchemaModel.name) private EventSchemaModel: Model<EventSchemaModel>) {}
 
     async addEventSchema(eventSchema: EventSchema): Promise<EventSchemaModel> {
-        const eventSchemaDocument = new this.EventSchemaModel({
-            jsonschema: eventSchema.jsonschema
-        });
-    
-        return eventSchemaDocument.save();
+        const eventSchemaDocument = new this.EventSchemaModel({ jsonschema: eventSchema.jsonschema });
+        return await eventSchemaDocument.save();
     }
     
     async findAllEventSchemas(): Promise<EventSchemaModel[]> {
@@ -29,6 +26,6 @@ export class EventSchemaService {
     }
 
     async findEventSchemaByName(eventName: string): Promise<EventSchemaModel> {
-        return await this.EventSchemaModel.findOne({ title: eventName });
+        return await this.EventSchemaModel.findOne({ 'jsonschema.title': eventName });
     }
 }

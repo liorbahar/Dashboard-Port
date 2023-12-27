@@ -1,5 +1,5 @@
 import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { EventSchemaService } from 'src/event-schema/event-schema.service';
 import { EventSchemaModel } from '../../database/schemas/event-schema.model';
 import {isNull} from 'lodash'
@@ -20,6 +20,6 @@ export class EventSchemaValidationExists implements ValidatorConstraintInterface
     }
   
     defaultMessage(args: ValidationArguments): string {
-      throw new HttpException(`Event Schema with id ${args.value} not found`, 404);
+      throw new HttpException(`Event Schema with id ${args.value} not found`, HttpStatus.NOT_FOUND);
     }
   }

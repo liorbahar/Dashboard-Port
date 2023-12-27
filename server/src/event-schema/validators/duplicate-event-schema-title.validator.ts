@@ -1,12 +1,11 @@
 import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { EventSchemaService } from 'src/event-schema/event-schema.service';
 import { isNull } from 'lodash';
 import { EventSchemaModel } from '../../database/schemas/event-schema.model';
   
 @ValidatorConstraint({ name: 'DuplicateEventSchemaTitleValidation', async: true })
 @Injectable()
-
 export class DuplicateEventSchemaTitleValidation implements ValidatorConstraintInterface {
     constructor(private eventSchemaService: EventSchemaService) {}
   
@@ -21,6 +20,6 @@ export class DuplicateEventSchemaTitleValidation implements ValidatorConstraintI
     }
   
     defaultMessage(args: ValidationArguments): string {
-      throw new HttpException(`Event named ${args.value} already exists in db`, 404);
+      throw new HttpException(`Event named ${args.value} already exists in db`, HttpStatus.CONFLICT);
     }
   }
