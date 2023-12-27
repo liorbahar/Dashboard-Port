@@ -45,7 +45,12 @@ const EventSchemaCreationDialog: React.FC<EventSchemaCreationDialogProps> = ({ o
     })
     .catch(err => {
       setIsLoading(false);
-      enqueueSnackbar('Error while create event schema',{variant : 'error'});
+      const statusCode: number = err.request.status;
+      if (statusCode === 409) {
+        enqueueSnackbar('Jsonschema schema with the same title already exists',{variant : 'error'});  
+      } else {
+        enqueueSnackbar('Error while create event schema',{variant : 'error'});
+      }
     })
   }
 
